@@ -22,7 +22,7 @@ services:
       context: ./server
       dockerfile: Dockerfile
       args: 
-        PORT: 888
+        PORT: ${API_PORT:-999}
         POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-CHANGEME}
     container_name: timearmor-hackathon-2024-server
     volumes:
@@ -30,7 +30,7 @@ services:
       - timearmor-hackathon-2024:/var/www/html/timearmor-hackathon-2024/
       - ~/.ssh/:/root/.ssh/
     ports:
-      - "888:888"
+      - ${API_PORT:-999}:${API_PORT:-999}
     restart: "no"
     working_dir: /var/www/html/timearmor-hackathon-2024
     stdin_open: true
@@ -44,7 +44,7 @@ services:
       - "8.8.8.8"
 
 networks:
-  twitch-healthbar-overlay:
+  timearmor-hackathon-2024:
     driver: bridge
     
 volumes:
