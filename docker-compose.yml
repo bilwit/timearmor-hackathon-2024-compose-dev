@@ -10,7 +10,7 @@ services:
     volumes: 
       - timearmor-hackathon-2024-database:/var/lib/postgresql/data
     ports:
-      - "5433:5433"
+      - "5432:5432"
     networks:
       - timearmor-hackathon-2024
     logging:
