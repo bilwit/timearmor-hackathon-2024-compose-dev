@@ -2,12 +2,12 @@ FROM node:20-alpine
 
 WORKDIR /var/www/html/timearmor-hackathon-2024
 
-ARG PORT
+ARG API_PORT
 ARG POSTGRES_PASSWORD
 
 ENV TZ America/Los_Angeles
 ENV SHELL /bin/ash
-ENV PORT=$PORT
+ENV API_PORT=$API_PORT
 ENV DATABASE_URL=postgres://postgres:$POSTGRES_PASSWORD@timearmor-hackathon-2024-database/postgres
 
 RUN apk add --no-cache --update tzdata \
@@ -18,4 +18,4 @@ RUN apk add --no-cache --update tzdata \
   && chown -R root:root /root/.ssh \
   && npm i -g npm@latest
 
-EXPOSE $PORT
+EXPOSE $API_PORT
