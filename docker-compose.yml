@@ -1,0 +1,52 @@
+version: '3.3'
+
+services:
+  database:
+    image: postgres:16-alpine
+    container_name: timearmor-hackathon-2024-database
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-CHANGEME}
+    volumes: 
+      - timearmor-hackathon-2024-database:/var/lib/postgresql/data
+    ports:
+      - "5433:5433"
+    networks:
+      - timearmor-hackathon-2024
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      args: 
+        PORT: 888
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-CHANGEME}
+    container_name: timearmor-hackathon-2024-server
+    volumes:
+      - ../certs/:/var/opt/certs:ro
+      - timearmor-hackathon-2024:/var/www/html/timearmor-hackathon-2024/
+      - ~/.ssh/:/root/.ssh/
+    ports:
+      - "888:888"
+    restart: "no"
+    working_dir: /var/www/html/timearmor-hackathon-2024
+    stdin_open: true
+    environment:
+      - SHELL=/bin/ash
+    networks:
+      - timearmor-hackathon-2024
+    depends_on: 
+      - database
+    dns:
+      - "8.8.8.8"
+
+networks:
+  twitch-healthbar-overlay:
+    driver: bridge
+    
+volumes:
+  timearmor-hackathon-2024:
+  timearmor-hackathon-2024-database:
