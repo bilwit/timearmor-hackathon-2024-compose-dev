@@ -13,4 +13,4 @@ Dev Environment for Time Armor Hackathon 2024
 - Open Visual Studio Code and with the Docker extension, attach the workspace to the running `timearmor-hackathon-2024-server` container
 - Open the folder `/var/www/html/`
 - Copy the pre-configured project boilerplate using `git clone https://github.com/bilwit/timearmor-hackathon-2024.git`
-- Install project dependencies using `cd timearmor-hackathon-2024; npm ci; cd client; npm ci; cd ..`
+- Install project dependencies using `cd timearmor-hackathon-2024; npm i; cd client; npm i; cd ..`
