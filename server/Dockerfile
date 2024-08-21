@@ -11,6 +11,7 @@ ENV API_PORT=$API_PORT
 ENV DATABASE_URL=postgres://postgres:$POSTGRES_PASSWORD@timearmor-hackathon-2024-database/postgres
 
 RUN apk add --no-cache --update tzdata \
+  ffmpeg \
   git \
   openssh \
   && mkdir -p /var/opt/certs \
